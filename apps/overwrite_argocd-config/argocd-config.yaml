@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-config
+  namespace: argocd
+spec:
+  project: maneki
+  source:
+    repoURL: https://github.com/masa213f/test-apps.git
+    targetRevision: main
+    path: manifests/argocd-config
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sandbox
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
